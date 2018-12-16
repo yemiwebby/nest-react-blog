@@ -1,12 +1,15 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { BlogController } from './blog/blog.controller';
-import { BlogService } from './blog/blog.service';
+import { MongooseModule } from '@nestjs/mongoose';
+import { BlogModule } from './blog/blog.module';
 
 @Module({
-  imports: [],
-  controllers: [AppController, BlogController],
-  providers: [AppService, BlogService],
+  imports: [
+    MongooseModule.forRoot('mongodb://localhost/nest-react-blog', { useNewUrlParser: true }),
+    BlogModule,
+  ],
+  controllers: [AppController],
+  providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
